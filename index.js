@@ -32,16 +32,11 @@ const getImageFiles = () => {
 
 // Function to get all files that might reference images
 const getReferenceFiles = () => {
+    
   // Define patterns to match various file types that might reference images
   const patterns = [
     `${DOCS_DIR}/docs/**/*.{md,mdx}`,
     `${DOCS_DIR}/blog/**/*.{md,mdx}`,
-    `${DOCS_DIR}/snippets/**/*.{md,mdx}`, // Include snippets
-    `${DOCS_DIR}/src/**/*.{js,jsx,ts,tsx,html,css}`, // Include CSS files
-    `${DOCS_DIR}/**/*.yml`, // Include YAML files
-    `${DOCS_DIR}/src/pages/**/*.{js,jsx,ts,tsx,html,css}`,
-    `${DOCS_DIR}/src/components/**/*.{js,jsx,ts,tsx,html,css}`,
-    `${DOCS_DIR}/docusaurus.config.js`, // Include the main configuration file
   ];
 
   // Flatten the array of patterns into an array of file paths
@@ -94,6 +89,15 @@ const isImageUsed = async (image, referenceFiles) => {
   return false; // Return false if no matches are found in any of the files
 };
 
+
+
+
+
+
+
+
+
+
 // Main function to find and report unused images
 const findUnusedImages = async () => {
   // Get all image files
@@ -102,21 +106,21 @@ const findUnusedImages = async () => {
   const referenceFiles = getReferenceFiles();
   const unusedImages = []; // Array to hold unused images
 
-  // Check each image to see if it is used in any reference file
-  for (const image of imageFiles) {
-    const used = await isImageUsed(image, referenceFiles);
-    if (!used) {
-      unusedImages.push(image); // Add to unused images if not used
-    }
-  }
+//   // Check each image to see if it is used in any reference file
+//   for (const image of imageFiles) {
+//     const used = await isImageUsed(image, referenceFiles);
+//     if (!used) {
+//       unusedImages.push(image); // Add to unused images if not used
+//     }
+//   }
 
-  // Log the unused images and write them to a CSV file if any are found
-  if (unusedImages.length > 0) {
-    console.log("Unused Images:");
-    unusedImages.forEach((image) => console.log(image));
-  } else {
-    console.log("No unused images found.");
-  }
+//   // Log the unused images and write them to a CSV file if any are found
+//   if (unusedImages.length > 0) {
+//     console.log("Unused Images:");
+//     unusedImages.forEach((image) => console.log(image));
+//   } else {
+//     console.log("No unused images found.");
+//   }
 };
 
 findUnusedImages();
